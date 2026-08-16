@@ -4,54 +4,92 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>海鸥速递 · 合伙人物流看板</title>
-  <meta name="description" content="头程轨迹、到货情况、到货时间。散货卡派以预计时间为准。" />
+  <meta name="description" content="一眼看清头程、到货情况、到货时间。" />
   <style>
-    body{margin:0;font-family:"Microsoft YaHei","PingFang SC",sans-serif;background:#f6f1e8;color:#14242b}
-    .wrap{width:min(1100px,calc(100% - 24px));margin:0 auto;padding:16px 0 48px}
-    header{background:#0f3d3b;color:#fff;padding:16px 0}
-    header .wrap{display:flex;justify-content:space-between;align-items:center;gap:12px}
-    .mark{width:36px;height:36px;border-radius:10px;background:#1b7a74;display:grid;place-items:center;font-weight:700}
-    .brand{display:flex;gap:10px;align-items:center}
-    .brand small{opacity:.75;font-size:12px}
-    h1{margin:18px 0 6px;font-size:26px}
-    .lead{color:#5b6b72;line-height:1.6;margin:0 0 16px}
-    .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:14px}
-    .stat{background:#fffdf8;border:1px solid #e4ddd1;border-radius:14px;padding:12px}
-    .stat b{display:block;font-size:24px}
-    .stat span{color:#5b6b72;font-size:12px}
-    .search{width:100%;border:1px solid #e4ddd1;border-radius:999px;padding:10px 14px;margin-bottom:14px;font:inherit}
-    .board{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-    .col{background:rgba(255,255,255,.5);border:1px solid #e4ddd1;border-radius:18px;padding:10px}
-    .col h2{margin:4px 6px 10px;font-size:16px}
-    .card{background:#fffdf8;border:1px solid #e4ddd1;border-radius:16px;padding:12px;margin-bottom:8px}
-    .tag{display:inline-block;font-size:11px;border-radius:999px;padding:2px 8px;background:#eef6f5;margin:0 4px 6px 0}
-    .eta{margin-top:8px;background:#fff8ee;border:1px solid #efd7ad;border-radius:10px;padding:8px;color:#8a4b08}
-    .track{color:#5b6b72;font-size:13px;line-height:1.55;margin-top:6px}
-    .hint{margin-top:16px;background:#fff7ea;border:1px solid #efd7ad;border-radius:12px;padding:12px;color:#6b4a16;line-height:1.6}
-    @media(max-width:800px){.stats,.board{grid-template-columns:1fr}}
+    :root{
+      --ink:#12231f; --muted:#66756f; --line:#e3ebe7; --bg:#eef4f1; --card:#fff;
+      --teal:#0d6b5e; --blue:#1a5f8a; --green:#1f7a45; --red:#b42318; --amber:#b86a00;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:"PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--ink);line-height:1.45}
+    .top{background:linear-gradient(160deg,#0b2e2c,#14524c);color:#fff;padding:18px 16px 20px}
+    .top-in{max-width:980px;margin:0 auto}
+    .brand{display:flex;align-items:center;gap:10px}
+    .mark{width:34px;height:34px;border-radius:9px;background:#1b7a74;display:grid;place-items:center;font-weight:700}
+    .brand b{display:block;font-size:16px}
+    .brand small{opacity:.72;font-size:12px}
+    h1{margin:14px 0 4px;font-size:22px;letter-spacing:-.02em}
+    .top p{margin:0;opacity:.78;font-size:13px}
+    .wrap{max-width:980px;margin:0 auto;padding:0 16px 48px}
+    .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:-14px}
+    .stat{background:var(--card);border-radius:14px;padding:12px 10px;box-shadow:0 8px 20px rgba(18,35,31,.06);text-align:center}
+    .stat em{display:block;font-style:normal;font-size:26px;font-weight:700;letter-spacing:-.04em}
+    .stat span{font-size:12px;color:var(--muted)}
+    .stat.head em{color:var(--teal)} .stat.way em{color:var(--blue)} .stat.ok em{color:var(--green)} .stat.bad em{color:var(--red)}
+    .bar{display:flex;gap:8px;margin:14px 0;flex-wrap:wrap}
+    .tab,.search{border:1px solid var(--line);background:#fff;border-radius:999px;padding:8px 14px;font:inherit}
+    .tab{cursor:pointer;color:var(--muted)}
+    .tab.on{background:#0b2e2c;color:#fff;border-color:#0b2e2c}
+    .search{flex:1;min-width:160px}
+    .list{display:flex;flex-direction:column;gap:10px}
+    .card{background:var(--card);border-radius:16px;padding:14px 14px 14px 16px;box-shadow:0 6px 18px rgba(18,35,31,.05);position:relative;overflow:hidden}
+    .card:before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px;background:var(--teal)}
+    .card.way:before{background:var(--blue)} .card.ok:before{background:var(--green)} .card.bad:before{background:var(--red)}
+    .row{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+    .name{font-size:16px;font-weight:700;margin:0 0 4px}
+    .meta{color:var(--muted);font-size:13px}
+    .badge{flex:none;border-radius:999px;padding:4px 10px;font-size:12px;font-weight:700;white-space:nowrap}
+    .badge.head{background:#e5f4f1;color:var(--teal)}
+    .badge.way{background:#e8f2fa;color:var(--blue)}
+    .badge.ok{background:#e7f6ec;color:var(--green)}
+    .badge.bad{background:#fdecea;color:var(--red)}
+    .times{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+    .time{background:#f6faf8;border-radius:12px;padding:8px 10px}
+    .time label{display:block;font-size:11px;color:var(--muted)}
+    .time b{font-size:18px}
+    .time.main{background:#fff6e8}
+    .time.main b{color:var(--amber)}
+    .time.ok{background:#e7f6ec}
+    .time.ok b{color:var(--green)}
+    .tracks{margin:10px 0 0;padding:0;list-style:none;color:var(--muted);font-size:12px}
+    .tracks li{padding-left:14px;position:relative;margin:3px 0}
+    .tracks li:before{content:"";width:6px;height:6px;border-radius:50%;background:#b7c9c3;position:absolute;left:0;top:6px}
+    .hint{margin-top:16px;color:var(--muted);font-size:12px;line-height:1.6}
+    .empty{text-align:center;color:var(--muted);padding:28px}
+    @media(max-width:640px){
+      .stats{grid-template-columns:repeat(2,1fr)}
+      .times{grid-template-columns:1fr}
+      .name{font-size:15px}
+    }
   </style>
 </head>
 <body>
-  <header>
-    <div class="wrap">
-      <div class="brand"><div class="mark">鸥</div><div><b>海鸥速递</b><br><small>合伙人观看 · 只读</small></div></div>
-      <small>打开即可看最新进度</small>
+  <header class="top">
+    <div class="top-in">
+      <div class="brand"><div class="mark">鸥</div><div><b>海鸥速递</b><small>合伙人观看 · 只读</small></div></div>
+      <h1>先看到货情况，再看到货时间</h1>
+      <p>散货只有卡派，没有快递单号。以预计到港 / 预计到货为准。</p>
     </div>
   </header>
   <main class="wrap">
-    <h1>物流轨迹 · 到货情况 · 到货时间</h1>
-    <p class="lead">散货只有卡派，没有快递单号。请看预计到港和预计到货时间。页面打开即为当前最新数据。</p>
     <div class="stats" id="stats"></div>
-    <input class="search" id="q" placeholder="搜批次、产品、目的仓" />
-    <div class="board" id="board"></div>
-    <div class="hint">口径：海运散货 = 卡派。卡派不提供 UPS/FedEx 轨迹，以预计到货时间为准。到仓后显示实际到货日期。</div>
+    <div class="bar">
+      <button class="tab on" data-f="">全部</button>
+      <button class="tab" data-f="头程">头程</button>
+      <button class="tab" data-f="运输途中">运输途中</button>
+      <button class="tab" data-f="已签收">已签收</button>
+      <button class="tab" data-f="异常">异常</button>
+      <input class="search" id="q" placeholder="搜产品、目的仓、批次" />
+    </div>
+    <div class="list" id="list"></div>
+    <p class="hint">打开本页即为当前最新数据。海运散货 = 卡派，只看预计时间；空运才有 UPS / FedEx 单号。</p>
   </main>
   <script>
     const DATA = [
       {id:"AIR-20260814-FL",type:"空运快递",product:"单株白云虎皮兰",qty:618,origin:"广州·基地物流",dest:"绿植新仓·佛罗里达",lastMile:"UPS",etaPort:"2026-08-22",etaSign:"2026-08-24",actualSign:"",stage:"头程",node:"已入仓",tracks:["2026-08-14 已入仓","UPS 1Z12CE790302627365"]},
       {id:"AIR-20260814-FL-2",type:"空运快递",product:"110#无纺布套袋、160#无纺布套袋、110#透明套袋",qty:17500,origin:"深圳·HO",dest:"绿植新仓·佛罗里达",lastMile:"UPS",etaPort:"2026-08-16",etaSign:"2026-08-17",actualSign:"",stage:"头程",node:"头程运输",tracks:["2026-08-14 头程运输","UPS 1ZB870X66622219475"]},
       {id:"SEA-FCL-20260801-ED",type:"海运整柜",product:"纸箱",qty:9920,origin:"广州·美绮",dest:"绿植美东仓·34744",lastMile:"卡派",etaPort:"2026-09-14",etaSign:"2026-09-20",actualSign:"",stage:"运输途中",node:"海运在途",tracks:["2026-08-01 海运在途"]},
-      {id:"SEA-LCL-20260613-WX",type:"海运散货",product:"太阳花种子",qty:10000,origin:"深圳·玩头程",dest:"绿植美西仓·91710",lastMile:"FedEx",etaPort:"2026-06-28",etaSign:"",actualSign:"",stage:"运输途中",node:"清关中",tracks:["2026-06-13 清关中","FedEx 873037051988","查验，赔付中"]},
+      {id:"SEA-LCL-20260613-WX",type:"海运散货",product:"太阳花种子",qty:10000,origin:"深圳·玩头程",dest:"绿植美西仓·91710",lastMile:"FedEx",etaPort:"2026-06-28",etaSign:"",actualSign:"",stage:"运输途中",node:"清关中",alert:"查验，赔付中",tracks:["2026-06-13 清关中","FedEx 873037051988","查验，赔付中"]},
       {id:"SEA-LCL-20260723-ED",type:"海运散货",product:"电动搬运车",qty:1,origin:"东莞·ZST",dest:"绿植美东仓·34744",lastMile:"卡派",etaPort:"2026-08-10",etaSign:"",actualSign:"",stage:"运输途中",node:"海运在途",tracks:["2026-07-23 海运在途"]},
       {id:"SEA-LCL-20260730-ED",type:"海运散货",product:"电风扇",qty:20,origin:"东莞·ZST",dest:"绿植美东仓·34744",lastMile:"卡派",etaPort:"2026-08-10",etaSign:"",actualSign:"",stage:"运输途中",node:"海运在途",tracks:["2026-07-30 海运在途"]},
       {id:"AIR-20260628-ED",type:"空运快递",product:"100套110#土培花盆、70棵洒金龟背竹",qty:170,origin:"深圳·玩头程",dest:"绿植美东仓·34744",lastMile:"UPS",etaPort:"2026-07-09",etaSign:"2026-07-13",actualSign:"",stage:"已签收",node:"客户已签收",tracks:["2026-06-28 客户已签收","UPS 1Z12CE790332558866"]},
@@ -61,35 +99,69 @@
       {id:"AIR-20260628-WX",type:"空运快递",product:"60套110#土培花盆、70棵洒金龟背竹、35白玉虎皮兰、60套110#水培花盆、虎皮兰",qty:385,origin:"深圳·玩头程",dest:"绿植美西仓·91710",lastMile:"UPS",etaPort:"2026-07-12",etaSign:"2026-07-14",actualSign:"",stage:"已签收",node:"客户已签收",tracks:["2026-06-28 客户已签收","UPS 1Z12CE790336480503"]},
       {id:"AIR-20260723-ED",type:"空运快递",product:"植物养护手册、发财树套网",qty:6100,origin:"深圳·HO",dest:"绿植美东仓·34744",lastMile:"UPS",etaPort:"2026-07-25",etaSign:"2026-07-27",actualSign:"",stage:"已签收",node:"客户已签收",tracks:["2026-07-23 客户已签收","UPS 1ZB870X66623322039"]}
     ];
+    let filter = "";
+    function isBad(s){ return !!(s.alert || /清关|查验|赔付/.test((s.node||"")+(s.tracks||[]).join(""))); }
+    function tone(s){ if(s.stage==="已签收") return "ok"; if(isBad(s)) return "bad"; if(s.stage==="运输途中") return "way"; return "head"; }
     function arrival(s){
+      if(s.alert) return s.alert;
       if(s.stage==="已签收"||s.actualSign) return "已到货，已签收";
+      if(/清关|查验/.test(s.node||"")) return "清关中 / 查验";
       if(/卡派/.test(s.node||"")) return "已到港，卡派途中";
-      if(/清关/.test(s.node||"")) return "清关中 / 查验";
       if(/到港/.test(s.node||"")) return "已到港，待卡派";
-      if(s.stage==="运输途中") return "在途未到";
-      return "头程准备中";
+      if(s.stage==="运输途中") return "海运在途，未到仓";
+      return s.node || "头程准备中";
+    }
+    function niceDate(d){
+      if(!d) return "待定";
+      const p=d.split("-");
+      if(p.length<3) return d;
+      return Number(p[1])+"月"+Number(p[2])+"日";
+    }
+    function left(d){
+      if(!d) return "";
+      const n=Math.round((new Date(d+"T00:00:00")-new Date(new Date().toDateString()))/86400000);
+      if(n>1) return "还有"+n+"天";
+      if(n===1) return "明天";
+      if(n===0) return "今天";
+      return "已过"+(-n)+"天";
+    }
+    function filtered(){
+      const q=(document.getElementById("q").value||"").trim();
+      return DATA.filter(s=>{
+        if(filter==="异常" && !isBad(s)) return false;
+        if(filter && filter!=="异常" && s.stage!==filter) return false;
+        if(!q) return true;
+        return [s.id,s.product,s.dest,s.origin,s.lastMile].join(" ").indexOf(q)>=0;
+      }).sort((a,b)=>{
+        const w=s=>(isBad(s)?0:s.stage==="头程"?1:s.stage==="运输途中"?2:3);
+        return w(a)-w(b);
+      });
     }
     function render(){
-      const q=(document.getElementById("q").value||"").trim();
-      const list=DATA.filter(s=>!q||[s.id,s.product,s.dest,s.origin].join(" ").indexOf(q)>=0);
-      const n=st=>list.filter(s=>s.stage===st).length;
+      const all=DATA, list=filtered();
+      const n=st=>all.filter(s=>s.stage===st).length;
       document.getElementById("stats").innerHTML=
-        "<div class='stat'><b>"+n("头程")+"</b><span>头程</span></div>"+
-        "<div class='stat'><b>"+n("运输途中")+"</b><span>运输途中</span></div>"+
-        "<div class='stat'><b>"+n("已签收")+"</b><span>已签收</span></div>"+
-        "<div class='stat'><b>"+list.filter(s=>s.type==="海运散货").length+"</b><span>散货卡派</span></div>";
-      document.getElementById("board").innerHTML=["头程","运输途中","已签收"].map(st=>{
-        const items=list.filter(s=>s.stage===st);
-        return "<section class='col'><h2>"+st+" · "+items.length+"</h2>"+(items.map(s=>
-          "<article class='card'><span class='tag'>"+s.type+"</span><span class='tag'>"+s.lastMile+"</span>"+
-          "<div style='font-weight:700;margin:4px 0'>"+s.product+" · "+s.qty+"件</div>"+
-          "<div class='track'>"+s.id+"<br>"+s.origin+" → "+s.dest+"</div>"+
-          "<div class='eta'>到货情况："+arrival(s)+"<br>预计到港："+(s.etaPort||"待定")+"<br><b>预计到货："+(s.etaSign||"待定")+"</b>"+
-          (s.actualSign?"<br>实际到货："+s.actualSign:"")+"</div>"+
-          "<div class='track'>轨迹：<br>"+(s.tracks||[]).join("<br>")+"</div></article>"
-        ).join("")||"<div class='track'>暂无</div>")+"</section>";
-      }).join("");
+        "<div class='stat head'><em>"+n("头程")+"</em><span>头程</span></div>"+
+        "<div class='stat way'><em>"+n("运输途中")+"</em><span>运输途中</span></div>"+
+        "<div class='stat ok'><em>"+n("已签收")+"</em><span>已签收</span></div>"+
+        "<div class='stat bad'><em>"+all.filter(isBad).length+"</em><span>异常关注</span></div>";
+      document.getElementById("list").innerHTML=list.map(s=>{
+        const t=tone(s);
+        const arrive=s.actualSign||s.etaSign;
+        const arriveCls=s.stage==="已签收"?"ok":"main";
+        return "<article class='card "+t+"'><div class='row'><div>"+
+          "<div class='name'>"+s.product+" · "+s.qty+"件</div>"+
+          "<div class='meta'>"+s.origin+" → "+s.dest+"<br>"+s.type+" · "+s.lastMile+(s.lastMile==="卡派"?" · 无快递单号":"")+"</div></div>"+
+          "<span class='badge "+t+"'>"+arrival(s)+"</span></div>"+
+          "<div class='times'><div class='time'><label>预计到港</label><b>"+niceDate(s.etaPort)+"</b></div>"+
+          "<div class='time "+arriveCls+"'><label>"+(s.actualSign?"实际到货":"预计到货")+"</label><b>"+niceDate(arrive)+"</b>"+
+          (s.stage!=="已签收" && s.etaSign?" <span class='meta'>"+left(s.etaSign)+"</span>":"")+"</div></div>"+
+          "<ul class='tracks'>"+(s.tracks||[]).map(x=>"<li>"+x+"</li>").join("")+"</ul></article>";
+      }).join("")||"<div class='empty'>没有符合条件的货</div>";
     }
+    document.querySelectorAll(".tab").forEach(btn=>{
+      btn.onclick=()=>{filter=btn.getAttribute("data-f")||"";document.querySelectorAll(".tab").forEach(b=>b.classList.toggle("on",b===btn));render();};
+    });
     document.getElementById("q").oninput=render;
     render();
   </script>
