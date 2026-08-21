@@ -86,19 +86,21 @@
   </main>
   <script>
     const DATA = [
-      {"id":"SEA-LCL-20260613-WX","type":"海运散货","product":"太阳花种子","qty":10000,"origin":"深圳·玩头程","dest":"绿植美西仓·91710","lastMile":"FedEx","etaPort":"2026-06-28","etaSign":"","actualSign":"","stage":"运输途中","node":"清关中","tracks":["2026-06-13 清关中","FedEx 873037051988","查验，赔付中"],"alert":"查验，赔付中"},
-      {"id":"AIR-20260814-FL","type":"空运快递","product":"单株白云虎皮兰","qty":618,"origin":"广州·基地物流","dest":"绿植新仓·佛罗里达","lastMile":"UPS","etaPort":"2026-08-22","etaSign":"2026-08-24","actualSign":"","stage":"头程","node":"已入仓","tracks":["2026-08-14 已入仓","UPS 1Z12CE790302627365"]},
-      {"id":"AIR-20260814-FL-2","type":"空运快递","product":"110#无纺布套袋、160#无纺布套袋、110#透明套袋","qty":17500,"origin":"深圳·HO","dest":"绿植新仓·佛罗里达","lastMile":"UPS","etaPort":"2026-08-16","etaSign":"2026-08-17","actualSign":"","stage":"头程","node":"头程运输","tracks":["2026-08-14 头程运输","UPS 1ZB870X66622219475"]},
-      {"id":"AIR-20260811-FL","type":"空运快递","product":"单株白云虎皮兰","qty":460,"origin":"广州·基地物流","dest":"绿植新仓·佛罗里达","lastMile":"UPS","etaPort":"2026-08-17","etaSign":"2026-08-18","actualSign":"","stage":"运输途中","node":"头程运输","tracks":["2026-08-11 头程运输","UPS 1Z12CE790329829696"]},
-      {"id":"SEA-FCL-20260801-ED","type":"海运整柜","product":"纸箱","qty":9920,"origin":"广州·美绮","dest":"绿植美东仓·34744","lastMile":"卡派","etaPort":"2026-09-14","etaSign":"2026-09-20","actualSign":"","stage":"运输途中","node":"海运在途","tracks":["2026-08-01 海运在途"]},
-      {"id":"SEA-LCL-20260723-ED","type":"海运散货","product":"电动搬运车","qty":1,"origin":"东莞·ZST","dest":"绿植美东仓·34744","lastMile":"卡派","etaPort":"2026-08-10","etaSign":"","actualSign":"","stage":"运输途中","node":"海运在途","tracks":["2026-07-23 海运在途"]},
-      {"id":"SEA-LCL-20260730-ED","type":"海运散货","product":"电风扇","qty":20,"origin":"东莞·ZST","dest":"绿植美东仓·34744","lastMile":"卡派","etaPort":"2026-08-10","etaSign":"","actualSign":"","stage":"运输途中","node":"海运在途","tracks":["2026-07-30 海运在途"]},
-      {"id":"AIR-20260628-ED","type":"空运快递","product":"110#土培花盆、洒金龟背竹","qty":170,"origin":"深圳·玩头程","dest":"绿植美东仓·34744","lastMile":"UPS","etaPort":"2026-07-09","etaSign":"2026-07-13","actualSign":"","stage":"已签收","node":"客户已签收","tracks":["2026-06-28 客户已签收","UPS 1Z12CE790332558866"]},
-      {"id":"AIR-20260628-ED-2","type":"空运快递","product":"透明外盆、虎皮兰","qty":105,"origin":"深圳·玩头程","dest":"绿植美东仓·34744","lastMile":"UPS","etaPort":"2026-07-09","etaSign":"2026-07-13","actualSign":"","stage":"已签收","node":"客户已签收","tracks":["2026-06-28 客户已签收","UPS 1Z12CE790327953877"]},
-      {"id":"AIR-20260628-ED-3","type":"空运快递","product":"白玉虎皮兰、110#土培花盆、110#水培花盆","qty":155,"origin":"深圳·玩头程","dest":"绿植美东仓·34744","lastMile":"UPS","etaPort":"2026-07-09","etaSign":"2026-07-13","actualSign":"","stage":"已签收","node":"客户已签收","tracks":["2026-06-28 客户已签收","UPS 1Z12CE790337568480"]},
-      {"id":"AIR-20260628-ED-4","type":"空运快递","product":"50虎皮兰","qty":50,"origin":"深圳·玩头程","dest":"绿植美东仓·34744","lastMile":"UPS","etaPort":"2026-07-09","etaSign":"2026-07-13","actualSign":"","stage":"已签收","node":"客户已签收","tracks":["2026-06-28 客户已签收","UPS 1Z12CE790331818694"]},
-      {"id":"AIR-20260628-WX","type":"空运快递","product":"土培花盆、洒金龟背竹、白玉虎皮兰、水培花盆、虎皮兰","qty":385,"origin":"深圳·玩头程","dest":"绿植美西仓·91710","lastMile":"UPS","etaPort":"2026-07-12","etaSign":"2026-07-14","actualSign":"","stage":"已签收","node":"客户已签收","tracks":["2026-06-28 客户已签收","UPS 1Z12CE790336480503"]},
-      {"id":"AIR-20260723-ED","type":"空运快递","product":"植物养护手册、发财树套网","qty":6100,"origin":"深圳·HO","dest":"绿植美东仓·34744","lastMile":"UPS","etaPort":"2026-07-25","etaSign":"2026-07-27","actualSign":"","stage":"已签收","node":"客户已签收","tracks":["2026-07-23 客户已签收","UPS 1ZB870X66623322039"]}
+      {"id": "SEA-LCL-20260613-WX", "type": "海运散货", "product": "太阳花种子", "qty": 10000, "origin": "深圳·玩头程", "dest": "绿植美西仓·91710", "lastMile": "FedEx", "etaPort": "2026-06-28", "etaSign": "", "actualSign": "", "stage": "运输途中", "node": "清关中", "tracks": ["2026-06-13 清关中", "FedEx 873037051988", "查验，赔付中"], "alert": "查验，赔付中"},
+      {"id": "AIR-20260814-FL", "type": "空运快递", "product": "单株白云虎皮兰", "qty": 618, "origin": "广州·基地物流", "dest": "绿植新仓·佛罗里达", "lastMile": "UPS", "etaPort": "2026-08-22", "etaSign": "2026-08-24", "actualSign": "", "stage": "头程", "node": "已入仓", "tracks": ["2026-08-14 已入仓", "UPS 1Z12CE790302627365"]},
+      {"id": "AIR-20260814-FL-2", "type": "空运快递", "product": "110#无纺布套袋、160#无纺布套袋、110#透明套袋", "qty": 17500, "origin": "深圳·HO", "dest": "绿植新仓·佛罗里达", "lastMile": "UPS", "etaPort": "2026-08-16", "etaSign": "2026-08-17", "actualSign": "", "stage": "头程", "node": "头程运输", "tracks": ["2026-08-14 头程运输", "UPS 1ZB870X66622219475"]},
+      {"id": "AIR-20260819-FL", "type": "空运快递", "product": "花盆外盆、土培内盆、气柱袋", "qty": 1500, "origin": "深圳·HO", "dest": "绿植新仓·佛罗里达", "lastMile": "UPS", "etaPort": "2026-08-25", "etaSign": "2026-08-26", "actualSign": "", "stage": "运输途中", "node": "头程运输", "tracks": ["2026-08-20 头程运输", "UPS 1ZB60W370404354730"]},
+      {"id": "AIR-20260819-FL-2", "type": "空运快递", "product": "气柱袋", "qty": 1440, "origin": "深圳·HO", "dest": "绿植新仓·佛罗里达", "lastMile": "UPS", "etaPort": "2026-08-25", "etaSign": "2026-08-26", "actualSign": "", "stage": "运输途中", "node": "头程运输", "tracks": ["2026-08-20 头程运输", "UPS 1ZB60W370410458009"]},
+      {"id": "AIR-20260811-FL", "type": "空运快递", "product": "单株白云虎皮兰", "qty": 460, "origin": "广州·基地物流", "dest": "绿植新仓·佛罗里达", "lastMile": "UPS", "etaPort": "2026-08-17", "etaSign": "2026-08-18", "actualSign": "", "stage": "运输途中", "node": "头程运输", "tracks": ["2026-08-11 头程运输", "UPS 1Z12CE790329829696"]},
+      {"id": "SEA-FCL-20260801-ED", "type": "海运整柜", "product": "纸箱", "qty": 9920, "origin": "广州·美绮", "dest": "绿植美东仓·34744", "lastMile": "卡派", "etaPort": "2026-09-14", "etaSign": "2026-09-20", "actualSign": "", "stage": "运输途中", "node": "海运在途", "tracks": ["2026-08-01 海运在途"]},
+      {"id": "SEA-LCL-20260723-ED", "type": "海运散货", "product": "电动搬运车", "qty": 1, "origin": "东莞·ZST", "dest": "绿植美东仓·34744", "lastMile": "卡派", "etaPort": "2026-08-10", "etaSign": "", "actualSign": "", "stage": "运输途中", "node": "海运在途", "tracks": ["2026-07-23 海运在途"]},
+      {"id": "SEA-LCL-20260730-ED", "type": "海运散货", "product": "电风扇", "qty": 20, "origin": "东莞·ZST", "dest": "绿植美东仓·34744", "lastMile": "卡派", "etaPort": "2026-08-10", "etaSign": "", "actualSign": "", "stage": "运输途中", "node": "海运在途", "tracks": ["2026-07-30 海运在途"]},
+      {"id": "AIR-20260628-ED", "type": "空运快递", "product": "110#土培花盆、洒金龟背竹", "qty": 170, "origin": "深圳·玩头程", "dest": "绿植美东仓·34744", "lastMile": "UPS", "etaPort": "2026-07-09", "etaSign": "2026-07-13", "actualSign": "", "stage": "已签收", "node": "客户已签收", "tracks": ["2026-06-28 客户已签收", "UPS 1Z12CE790332558866"]},
+      {"id": "AIR-20260628-ED-2", "type": "空运快递", "product": "透明外盆、虎皮兰", "qty": 105, "origin": "深圳·玩头程", "dest": "绿植美东仓·34744", "lastMile": "UPS", "etaPort": "2026-07-09", "etaSign": "2026-07-13", "actualSign": "", "stage": "已签收", "node": "客户已签收", "tracks": ["2026-06-28 客户已签收", "UPS 1Z12CE790327953877"]},
+      {"id": "AIR-20260628-ED-3", "type": "空运快递", "product": "白玉虎皮兰、110#土培花盆、110#水培花盆", "qty": 155, "origin": "深圳·玩头程", "dest": "绿植美东仓·34744", "lastMile": "UPS", "etaPort": "2026-07-09", "etaSign": "2026-07-13", "actualSign": "", "stage": "已签收", "node": "客户已签收", "tracks": ["2026-06-28 客户已签收", "UPS 1Z12CE790337568480"]},
+      {"id": "AIR-20260628-ED-4", "type": "空运快递", "product": "50虎皮兰", "qty": 50, "origin": "深圳·玩头程", "dest": "绿植美东仓·34744", "lastMile": "UPS", "etaPort": "2026-07-09", "etaSign": "2026-07-13", "actualSign": "", "stage": "已签收", "node": "客户已签收", "tracks": ["2026-06-28 客户已签收", "UPS 1Z12CE790331818694"]},
+      {"id": "AIR-20260628-WX", "type": "空运快递", "product": "土培花盆、洒金龟背竹、白玉虎皮兰、水培花盆、虎皮兰", "qty": 385, "origin": "深圳·玩头程", "dest": "绿植美西仓·91710", "lastMile": "UPS", "etaPort": "2026-07-12", "etaSign": "2026-07-14", "actualSign": "", "stage": "已签收", "node": "客户已签收", "tracks": ["2026-06-28 客户已签收", "UPS 1Z12CE790336480503"]},
+      {"id": "AIR-20260723-ED", "type": "空运快递", "product": "植物养护手册、发财树套网", "qty": 6100, "origin": "深圳·HO", "dest": "绿植美东仓·34744", "lastMile": "UPS", "etaPort": "2026-07-25", "etaSign": "2026-07-27", "actualSign": "", "stage": "已签收", "node": "客户已签收", "tracks": ["2026-07-23 客户已签收", "UPS 1ZB870X66623322039"]}
     ];
     let filter = "";
     function isBad(s){ return !!(s.alert || /清关|查验|赔付/.test((s.node||"")+(s.tracks||[]).join(""))); }
@@ -109,7 +111,7 @@
       if(/清关|查验/.test(s.node||"")) return "清关中 / 查验";
       if(/卡派/.test(s.node||"")) return "已到港，卡派途中";
       if(/到港/.test(s.node||"")) return "已到港，待卡派";
-      if(s.stage==="运输途中") return "海运在途，未到仓";
+      if(s.stage==="运输途中") return /空运/.test(s.type||"") ? (s.node||"空运在途") : "海运在途，未到仓";
       return s.node || "头程准备中";
     }
     function niceDate(d){
